@@ -1,12 +1,16 @@
 import e from "express";
-import User from "../models/User";
+import User from "../models/User.js";
 
 const router = e.Router();
 router.post('/signin', async (req, res) => {
     try{
       const {email, password} = req.body;
-      const user=await User.find({email});
-      if(!user || user.password !== password){
+      console.log("Received signin request:", { email, password });
+      
+      const user=await User.findOne({email});
+      console.log("Found user:", user);
+      // Check if user exists and password matches
+      if(user.length === 0 || user.password !== password){
          return res.status(400).json({ message: "Invalid email or password" });
       }
       res.json({ message: "User signed in successfully", user });
@@ -17,3 +21,4 @@ router.post('/signin', async (req, res) => {
 });    
 
 export default router;
+

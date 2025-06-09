@@ -1,3 +1,4 @@
+
 import { useContext,createContext,useState, Children } from "react";
 
 const UserContext = createContext();
@@ -10,38 +11,84 @@ export const useUser = () => {
     return context;
 }
 
-let mockUsers = [
-    { id: '1', username: 'john_doe', email: 'john@example.com' },
-    { id: '2', username: 'jane_smith', email: 'jane@example.com' },
-    { id: '3', username: 'alex_dev', email: 'alex@example.com' },
-];
+// let mockUsers = [
+//     { id: '1', username: 'john_doe', email: 'john@example.com' },
+//     { id: '2', username: 'jane_smith', email: 'jane@example.com' },
+//     { id: '3', username: 'alex_dev', email: 'alex@example.com' },
+// ];
 
 export const UserProvider = ({children}) => {
     
    const [user,setUser] =useState(null);
    
-   const sign_in =  (email,password)  => {
-    const flag = mockUsers.find( u => u.email === email)
-    if(flag && password.length>0){
-      setUser(flag)
-      return true;
+   const sign_in = async (email,password)  => {
+    
+    const user = {
+      email:email,
+      password:password,
     }
-    return false
+    
+    //sending a request to the backend to check if the user exists
+    try {
+       const response = await fetch('http://localhost:5000/api/signin', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(user),
+      });
+      
+      const data = await response.json();
+      if (response.ok) {
+        // If the response is ok, set the user
+        setUser(data.user);
+        return true;
+      } else {
+        // If the response is not ok, log the error message
+        console.error("Error signing in:", data.message);
+        return false;
+      }
+    } catch (err) {
+      console.error("Error signing in:", err);
+      return false;
+    } 
    }
 
-   const sign_up =(username,email,password) => {
-      if(username && email && password.length>0){
+   const sign_up = async (username,email,password) => {
+       //creating a new user
         const newUser={
         id: Date.now().toString(),
         username,
-        email
+        email,
+        password, 
+        };
+         
+      //seding a request to the backend to create a new user
+        try{
+          const response = await fetch('http://localhost:5000/api/signup', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newUser),
+          });
+          
+          const data = await response.json();
+          if (response.ok) {
+            // If the response is ok, log the success message
+            console.log("User created successfully:", data);
+            setUser(newUser);
+            return true
+          } else {
+            // If the response is not ok, log the error message
+            console.error("Error creating user:", data.message);
+            return false;
+          }
+        }catch(err){
+          console.error("Error creating user:", err);
+          return false;
         }
-        mockUsers.push(newUser)
-        setUser(newUser)
-        return true
-      }
-      return false
-    }
+   }
 
     const sign_out = () => {
       setUser(null)

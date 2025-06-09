@@ -13,19 +13,19 @@ const Auth = ({ isOpen, onClose }) => {
     setMode('sign_in')
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if( mode === 'sign_in'){
-      if (sign_in(email, password)) {
-      setEmail('')
-      setPassword('')
-      onClose()
-      }
-      else {
-      alert("Invalid Credentials")
+      const suscess = await sign_in(email, password)
+      if (suscess) {  
+        setEmail('')
+        setPassword('')
+        onClose()
+        console.log(email,password)
       }
     }
     else{
-      if (sign_up(username, email, password)) {
+      const success = await sign_up(username, email, password)
+      if (success) {
       setUsername('')
       setEmail('')
       setPassword('')
