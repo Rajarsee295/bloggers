@@ -2,6 +2,8 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import User from './models/User';
+import signupRoutes from './routes/signup';
+import signinRoutes from './routes/signin';
 
 
 dotenv.config();
@@ -16,9 +18,13 @@ mongoose.connect("mongodb://127.0.0.1:27017/BloggersDB", {
 .then(() => console.log('✅ MongoDB connected'))
 .catch((err) => console.error('❌ MongoDB connection error:', err));
 
+app.use('/api/signup', signupRoutes);
+app.use('/api/signin', signinRoutes);
+
+
 app.get('/', (req, res) => {
-  res.send('Hello from Express + MongoDB');
+  res.send('Welcome to the Blogger API');
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT =  5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
