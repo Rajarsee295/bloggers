@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.root{
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.header_container{
+    width: 100%;
+   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+   resize: horizontal;
+}
+
+.header{
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+    grid-template-rows: repeat(1,75px);
+    width: 100%;
+    height: 75px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.left_side_header{
+    display: flex;
+    font-family: "Lexend", sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    color: #0e7fea;
+    justify-content: left;
+    padding-left: 160px;
+    align-items: center;
+}
+
+.right_side_header{
+    display: flex;
+    justify-content: right;
+    padding-right: 250px;
+    align-items: center;
+}
+
+.sign_in_button{
+    height: 40px;
+    width: 80px;
+    background-color: white;
+    border: 1px solid #0e7fea;
+    border-radius: 10px;
+    color:#0e7fea;
+    transition: background-color 0.15s,color 0.15s;
+}
+
+.sign_in_button:hover{
+    background-color: #0e7fea;
+    color: white;
+    cursor: pointer;
+}
+
+.sign_in_button:active{
+    opacity: 0.75;
+}

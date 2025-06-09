@@ -1,0 +1,29 @@
+# Ignore environment variables
+.env
+**/.env
+
+# Ignore node modules everywhere
+node_modules/
+**/node_modules/
+
+# Ignore log files
+*.log
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore npm/yarn debug files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Ignore coverage reports
+coverage/
+**/coverage/
+
+# Ignore build output
+dist/
+build/
+**/dist/
+**/build/
