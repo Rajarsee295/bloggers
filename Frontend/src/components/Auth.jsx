@@ -15,16 +15,17 @@ const Auth = ({ isOpen, onClose }) => {
 
   const handleSubmit = async () => {
     if( mode === 'sign_in'){
-      const suscess = await sign_in(email, password)
+      const suscess = sign_in(email, password)
       if (suscess) {  
         setEmail('')
         setPassword('')
         onClose()
         console.log(email,password)
       }
+      else alert("Please fill all the credentials")
     }
     else{
-      const success = await sign_up(username, email, password)
+      const success =  sign_up(username, email, password)
       if (success) {
       setUsername('')
       setEmail('')
