@@ -7,7 +7,7 @@ router.post('/signup', async (req, res) => {
     try {
         const { id , username, email, password } = req.body;
         
-         
+        
         //checking if email and username are already present in the database
         const coexsting = await User.findOne({ username })
         const coexstingEmail = await User.find({ email });

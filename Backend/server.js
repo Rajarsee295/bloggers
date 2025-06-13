@@ -1,13 +1,16 @@
+//importing required modules
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import User from './models/User.js';
-import signupRoutes from './routes/signup.js';
-import signinRoutes from './routes/signin.js';
 import cors from 'cors';
 
-dotenv.config();
+//Importing routes
+import signupRoutes from './routes/signup.js';
+import signinRoutes from './routes/signin.js';
+import blogRoutes from './routes/blog.js';
 
+// Load environment variables from .env file
+dotenv.config();
 
 //cors for frontend and backend communication
 // This allows the frontend to make requests to the backend
@@ -31,6 +34,7 @@ mongoose.connect("mongodb://127.0.0.1:27017/BloggersDB", {//mongoDB URL
 //calling signin and signup routes
 app.use('/api', signupRoutes);
 app.use('/api', signinRoutes);
+app.use('/api', blogRoutes);
 
 // Home route
 app.get('/', (req, res) => {

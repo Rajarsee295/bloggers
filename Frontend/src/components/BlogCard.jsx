@@ -26,8 +26,8 @@ const BlogCard = () => {
           <div className="">
 
             <div className="flex interactive pl-[23px] h-[50px] items-center pb-[12.5px]">
-              <button className={`flex justify-center items-center border rounded-lg h-[80%] text-lg w-[7%] mr-[10px] transition duration-150 ${!like ? "bg-gray-200 text-gray-500  hover:bg-gray-300" : "bg-green-500 text-white hover:opacity-75"}`} onClick={() => { setLike(!like); if (dislike == true) setDislike(!dislike); }}> ↑ 24</button>
-              <button className={`flex justify-center items-center border rounded-lg h-[80%] text-lg w-[7%] mr-[10px] transition duration-150 ${!dislike ? "bg-gray-200 text-gray-500  hover:bg-gray-300" : "bg-red-500 text-white hover:opacity-75"} `} onClick={() => { setDislike(!dislike); if (like == true) setLike(!like); }}> ↓ 4</button>
+              <button className={`flex justify-center items-center border rounded-lg h-[80%] text-[80%] w-[8%] mr-[10px] transition duration-150 ${!like ? "bg-gray-200 text-gray-500  hover:bg-gray-300" : "bg-green-500 text-white hover:opacity-75"}`} onClick={() => { setLike(!like); if (dislike == true) setDislike(!dislike); }}> ↑ 204</button>
+              <button className={`flex justify-center items-center border rounded-lg h-[80%] text-[80%] w-[8%] mr-[10px] transition duration-150 ${!dislike ? "bg-gray-200 text-gray-500  hover:bg-gray-300" : "bg-red-500 text-white hover:opacity-75"} `} onClick={() => { setDislike(!dislike); if (like == true) setLike(!like); }}> ↓ 104</button>
               <button className="text-custom-gray-3" onClick={()=>{setCommentSection(!commentSection)}}>💬 1 Comments</button>
               
               <div className="ml-auto pr-[23px] flex items-center">
