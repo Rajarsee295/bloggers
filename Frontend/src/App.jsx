@@ -1,9 +1,12 @@
+import { UserProvider } from './contexts/User'
 import Index from './pages/index'
-function App(){ 
- 
+function App() {
+
   return (
     <>
-      <Index />
+      <UserProvider>
+        <Index />
+      </UserProvider>
     </>
   )
 }

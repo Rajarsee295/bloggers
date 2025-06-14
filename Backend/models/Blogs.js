@@ -9,9 +9,9 @@ const blogSchema = new mongoose.Schema({
   blog_upvotes: Number,   
   blog_downvotes: Number,
   username: String,
-});
+},{timestamps:true});
 
 //creating a model from the schema
 // The model provides an interface to interact with the user collection in MongoDB
 const Blog = mongoose.model('Blog', blogSchema);
-export default Blog;
+export default Blog;  

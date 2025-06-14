@@ -11,7 +11,7 @@ router.post('/createBlog', async (req, res) => {
         const { id, blog_title, blog_content, blog_comments , blog_upvotes , blog_downvotes , username } = req.body;
         const blog = new Blog({id, blog_title, blog_content, blog_comments , blog_upvotes , blog_downvotes , username});//posting the blog to db
         await blog.save();//saveing the blog to the database
-       
+        res.json(blog)
     } catch (err) {
         res.status(500).json({ message: "Internal server error" });
     }
@@ -20,7 +20,7 @@ router.post('/createBlog', async (req, res) => {
 //getting all blogs
 router.get('/getBlogs', async (req, res) => {
     try {
-        const blogs = await Blog.find({}); // Fetch all blogs from the database
+        const blogs = await Blog.find({}).sort({createdAt:-1 }); // Fetch all blogs from the database
         res.json(blogs); // Send the blogs as a JSON response
     } catch (err) {
         res.status(500).json({ message: "Internal server error" });

@@ -11,12 +11,6 @@ export const useUser = () => {
     return context;
 }
 
-// let mockUsers = [
-//     { id: '1', username: 'john_doe', email: 'john@example.com' },
-//     { id: '2', username: 'jane_smith', email: 'jane@example.com' },
-//     { id: '3', username: 'alex_dev', email: 'alex@example.com' },
-// ];
-
 export const UserProvider = ({children}) => {
     
    const [user,setUser] =useState(null);
@@ -41,7 +35,7 @@ export const UserProvider = ({children}) => {
       const data = await response.json();
       if (response.ok) {
         // If the response is ok, set the user
-        setUser(data.user);
+        setUser(data.user);        
         return true;
       } else {
         // If the response is not ok, log the error message
