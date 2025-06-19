@@ -11,6 +11,7 @@ import instantBlogPost from './routes/instantBlogPost.js';
 import signupRoutes from './routes/signup.js';
 import signinRoutes from './routes/signin.js';
 import blogRoutes from './routes/blog.js';
+import addComment from './routes/addComment.js'
 
 // Load environment variables from .env file
 dotenv.config();
@@ -22,9 +23,10 @@ dotenv.config();
 // This allows the frontend to make requests to the backend
 const app = express();
 app.use(express.json());
+
 app.use(cors({
   origin: 'http://localhost:5173', // Adjust this to your frontend URL
-  methods: ['GET', 'POST'],
+  methods: ['GET', 'POST' , 'DELETE' , 'PUT'],
   credentials: true,
 }));
 
@@ -32,6 +34,8 @@ app.use(cors({
 app.use('/api', signupRoutes);
 app.use('/api', signinRoutes);
 app.use('/api', blogRoutes);
+app.use('/api', addComment);
+
 
 
 
@@ -41,7 +45,7 @@ const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
     origin: "http://localhost:5173",
-    methods: ["GET", "POST"],
+    methods: ["GET", "POST","DELETE"],
     credentials: true,
   }
 });

@@ -6,5 +6,9 @@ export default function (io){
         socket.on("newBlogPost", (data) => {
             io.emit("blogPost", data);
         });
+
+        socket.on("newCommentPost", () => {
+            io.emit("CommentPost");
+        });
     });
 }

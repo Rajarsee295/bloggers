@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useUser } from "../contexts/User";
-import {io} from "socket.io-client";
+import { io } from "socket.io-client";
 const socket = io("http://localhost:5000");
 
 const BlogForm = ({ CloseForm, onCloseForm }) => {
@@ -8,9 +8,19 @@ const BlogForm = ({ CloseForm, onCloseForm }) => {
 
    const [title, setTitle] = useState('')
    const [blogContent, setblogContent] = useState('')
+
    const { user } = useUser()
 
    const handleSubmit = async () => {
+      const currentDate = new Date();
+      const formattedDate = currentDate.toLocaleDateString('en-IN', {
+         day: '2-digit',
+         month: 'long',
+         year: 'numeric',
+      });
+      console.log(formattedDate);
+
+
       onCloseForm();
       const blogData = {
          id: Date.now().toString(), // Unique ID based on timestamp
@@ -19,11 +29,16 @@ const BlogForm = ({ CloseForm, onCloseForm }) => {
          blog_comments: [],
          blog_upvotes: 0,
          blog_downvotes: 0,
-         username: user.username
+         username: user.username,
+         date:new Date(),
       };
+      
       setTitle('')
       setblogContent('')
+
       socket.emit("newBlogPost", blogData); // Emit the new blog post to the server
+
+      //posting the blog to the backend
       try {
          await fetch('http://localhost:5000/api/createBlog', {
             method: 'POST',
